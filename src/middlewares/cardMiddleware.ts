@@ -16,8 +16,6 @@ export default async function validateAPIKey(req: Request,  res: Response, next:
         throw {type: "NotFound", message:"Employee not found"}
     }
 
-    const card = await 
-
     next()
 
 }
