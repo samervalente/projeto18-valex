@@ -20,10 +20,13 @@
   },
   "homepage": "https://github.com/samervalente/projeto18-valex#readme",
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
+    "@types/cryptr": "^4.0.1",
     "@types/dotenv": "^8.2.0",
     "@types/node": "^18.7.14",
     "@types/pg": "^8.6.5",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "cryptr": "^6.0.3",
     "dayjs": "^1.11.5",

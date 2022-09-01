@@ -1,9 +1,9 @@
 
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 
 export default function validateSchema(schema: any){
-    return (req: Request,  res: Response, next: any) => {
+    return (req: Request,  res: Response, next: NextFunction) => {
            const {error} = schema.validate(req.body)
             
             if(error){

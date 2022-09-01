@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 import * as employeeRepository from "../repositories/employeeRepository"
 
 
-export default async function validateAPIKey(req: Request,  res: Response, next: any){
+export default async function validateAPIKey(req: Request,  res: Response, next: NextFunction){
     const APIKey = req.headers.apikey
     const {employeeId} = req.body
 
