@@ -1,5 +1,5 @@
-import { connection } from "../database/database.js";
-import { mapObjectToUpdateQuery } from "../utils/sqlUtils.js";
+import connection  from "../database/postgres";
+import { mapObjectToUpdateQuery } from "../utils/sqlUtils";
 
 export type TransactionTypes =
   | "groceries"
@@ -81,7 +81,7 @@ export async function insert(cardData: CardInsertData) {
     type,
   } = cardData;
 
-  connection.query(
+ await connection.query(
     `
     INSERT INTO cards ("employeeId", number, "cardholderName", "securityCode",
       "expirationDate", password, "isVirtual", "originalCardId", "isBlocked", type)
