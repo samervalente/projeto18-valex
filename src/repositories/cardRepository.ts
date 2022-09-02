@@ -123,9 +123,3 @@ export async function remove(id: number) {
   connection.query<any, [number]>("DELETE FROM cards WHERE id=$1", [id]);
 }
 
-
-export async function getAllEmployeeCards(employeeId: number){
-  const {rows: cards} = await connection.query(`SELECT * FROM cards WHERE "employeeId" = $1`,[employeeId])
-
-  return cards
-}

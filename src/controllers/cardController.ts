@@ -3,14 +3,18 @@ import { faker } from '@faker-js/faker';
 import  dayjs from 'dayjs'
 import Cryptr from "cryptr"
 import bcrypt from "bcrypt"
+import dotenv from "dotenv"
 import * as companieService from "../services/companieService"
 import * as cardService from "../services/cardService"
 import * as cardRepository from "../repositories/cardRepository"
 import * as employeeService from "../services/employeeService"
 import formatEmployeeName from "../utils/format";
 
+dotenv.config()
+
 export  async function createCard(req: Request, res: Response){
-    const APIKey: any = req.headers.apikey
+    const APIKey = res.locals.APIKEY
+ 
     const {cardType, employeeId} = req.body
     const cryptr = new Cryptr(process.env.SECRET_KEY)
 
@@ -48,9 +52,9 @@ export  async function createCard(req: Request, res: Response){
 
 export async function activateCard(req: Request, res: Response){
   const {password, cardId, CVC} = req.body
+  const updateColumns = {password: bcrypt.hashSync(password, 10)}
 
-  await cardService.verifyIsValidateCard(cardId, CVC)
-  await cardService.activateCard(cardId, {password: bcrypt.hashSync(password, 10), isBlocked: false})
+  await cardService.activateCard(cardId, CVC, updateColumns)
 
   return res.status(200).send("Sucess. The card was actived!")
 
@@ -62,4 +66,21 @@ export async function getCardTransactions(req: Request, res: Response){
   const cardMovements = await cardService.getTransactionsAndRecharges(Number(id))
 
   return res.status(200).send(cardMovements)
+}
+
+
+export async function lockCard(req: Request, res: Response){
+  const {cardId, password} = req.body
+  
+  await cardService.lockCard(cardId, password)
+
+  return res.status(200).send("Sucess. The card was blocked")
+}
+
+export async function unlockCard(req: Request, res: Response){
+  const {cardId, password} = req.body
+  
+  await cardService.unlockCard(cardId, password)
+  
+  return res.status(200).send("Sucess. The card was unlock")
 }

@@ -4,7 +4,7 @@ import * as employeeRepository from "../repositories/employeeRepository"
 
 
 export default async function validateAPIKey(req: Request,  res: Response, next: NextFunction){
-    const APIKey = req.headers.apikey
+    const APIKey = req.headers["x-api-key"]
     const {employeeId} = req.body
 
     if(!APIKey){
@@ -16,6 +16,7 @@ export default async function validateAPIKey(req: Request,  res: Response, next:
         throw {type: "NotFound", message:"Employee not found"}
     }
 
+    res.locals.APIKEY = APIKey
     next()
 
 }

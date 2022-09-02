@@ -5,6 +5,7 @@ export default async function errorHandlingMiddleware(error: any, req: Request, 
   
     switch(type){
         case "BadRequest": return res.status(400).send(error.message)
+        case "Unauthorized": return res.status(401).send(error.message)
         case "NotFound": return res.status(404).send(error.message) 
         case "InvalidPayload": return res.status(422).send(error.message)
         case "Conflict": return res.status(409).send(error.message) 
