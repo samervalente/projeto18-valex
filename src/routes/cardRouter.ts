@@ -9,5 +9,6 @@ const routes = Router()
 
 routes.post("/card", schemaValidator(cardSchema.createCardSchema), validateAPIKey, cardController.createCard)
 routes.post("/card/ativate", schemaValidator(cardSchema.activateCardSChema), cardController.activateCard)
+routes.get("/card/transactions/:id", cardController.getCardTransactions )
 
 export default routes

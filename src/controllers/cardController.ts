@@ -54,5 +54,12 @@ export async function activateCard(req: Request, res: Response){
 
   return res.status(200).send("Sucess. The card was actived!")
 
+}
 
+export async function getCardTransactions(req: Request, res: Response){
+  const {id} = req.params
+
+  const cardMovements = await cardService.getTransactionsAndRecharges(Number(id))
+
+  return res.status(200).send(cardMovements)
 }
