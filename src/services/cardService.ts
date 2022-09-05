@@ -21,7 +21,7 @@ export async function findCardByTypeAndEmployeeId(cardType:cardRepository.Transa
 export async function createCard(cardType: cardRepository.TransactionTypes, employeeId: number){
     const cryptr = new Cryptr(process.env.SECRET_KEY)
      //Create card data
-     const number = faker.finance.creditCardNumber()
+     let number = faker.finance.creditCardNumber('mastercard')
      const securityCode = cryptr.encrypt(faker.finance.creditCardCVV())
  
      const date = (`${dayjs().year() + 5 }-${dayjs().month() + 1}`)
