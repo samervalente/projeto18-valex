@@ -17,3 +17,15 @@ export const blockAndUnblockCardSchema = joi.object({
     cardId: joi.number().required(),
     password: joi.string().required()
 })
+
+export const rechargeCardSChema = joi.object({
+    amount:joi.number().required()
+})
+
+export const purchaseSchema = joi.object({
+    cardId:joi.number().required(),
+    businessId:joi.number().required(),
+    password: joi.string().required(),
+    amount: joi.number().required()
+
+})

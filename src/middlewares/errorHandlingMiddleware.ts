@@ -11,7 +11,7 @@ export default async function errorHandlingMiddleware(error: any, req: Request, 
         case "Conflict": return res.status(409).send(error.message) 
     }
     
-    console.log(error)
+    
     return res.sendStatus(500)
 
 }
